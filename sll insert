@@ -1,0 +1,67 @@
+import java.util.*;
+class linkedlist{
+    Node head;
+    class Node{
+        int data;
+        Node next;
+        Node(int val){
+            data = val;
+            next = null;
+        }
+    }linkedlist(){
+        head = null;
+    }public void insertend(int val){
+        Node newnode = new Node(val);
+        if (head==null){
+            head = newnode;
+        }
+        else{
+            Node temp = head;
+            while(temp.next != null){
+                temp =  temp.next;
+            }
+            temp.next = newnode;
+        }
+    }public void insertbegin(int val){
+        Node newnode = new Node(val);
+        if (head==null){
+            head = newnode;
+        }
+        else{
+            newnode.next=head;
+            head=newnode;
+        }}
+    void insertAtPosition(int a, int position) {
+        Node newNode = new Node(a);
+        Node temp = head;
+        for (int i = 1; i < position; i++) {
+            temp = temp.next;}
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+    public void display(){
+        Node temp = head;
+        while(temp != null){
+            System.out.print(temp.data+"-->");
+            temp = temp.next;
+        }
+        System.out.println("Null");
+    }
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        linkedlist list = new linkedlist();
+        int m = sc.nextInt();
+        for (int i = 0; i < m; i++) {
+            int val = sc.nextInt();
+            list.insertend(val);
+        }
+        list.display();
+        int val = sc.nextInt();
+        list.insertbegin(val);
+        list.display();
+        int a = sc.nextInt();
+        int position= sc.nextInt();
+        list.insertAtPosition(a,position);
+        list.display();
+    }
+}
