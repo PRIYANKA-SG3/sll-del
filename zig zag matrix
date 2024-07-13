@@ -1,0 +1,60 @@
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+{
+class ZigZagSimport java.util.Scanner;
+class ZigZagSum implements Runnable {
+    private int[][] matrix;
+    private int rows;
+    private int cols;
+    private int sum;
+
+    public ZigZagSum(int[][] matrix, int rows, int cols) {
+        this.matrix = matrix;
+        this.rows = rows;
+        this.cols = cols;
+        this.sum = 0;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < rows; i++) {
+            if (i % 2 !=0) {
+                for (int j = 1; j < cols-1; j++) {
+                    sum += matrix[i][j];
+                }
+            } else {
+                for (int j=cols-1;j>=0;j--) {
+                    sum += matrix[i][j];
+                }
+            }
+        }
+    }
+    public int getSum() {
+        return sum;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int rows = scanner.nextInt();
+        int cols = scanner.nextInt();
+        int[][] matrix = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }}
+        ZigZagSum zigZagSum = new ZigZagSum(matrix, rows, cols);
+        Thread thread = new Thread(zigZagSum);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int totalSum = zigZagSum.getSum();
+        System.out.println("The sum of Zig-Zag pattern is " + totalSum);
+        scanner.close();
+    }
+}
